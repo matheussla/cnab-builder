@@ -22,6 +22,12 @@ This Node.js service allows you to process CNAB files, search for segments, and 
     yarn install
     ```
 
+## Test
+
+Running Jest Tests:
+
+     yarn test
+
 ## Usage
 
 You can use the CLI to search for segments or company names within a CNAB file and export the results to a JSON file.
