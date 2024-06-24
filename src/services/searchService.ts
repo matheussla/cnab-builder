@@ -1,36 +1,32 @@
 import { ICompany } from '../interfaces';
 
 export class SearchService {
-  searchBySegment(lines: string[], segment: string): ICompany[] {
-    const companies: ICompany[] = [];
-    lines.forEach((line, index) => {
-      if (line.includes(segment)) {
-        const fullName = line.slice(86, 126).trim();
-        const address = line.slice(126, 166).trim();
-        companies.push({
-          name: fullName,
-          address,
-          position: index,
-          segment,
-        });
-      }
-    });
-    return companies;
-  }
-
-  searchByCompanyName(lines: string[], companyName: string): ICompany[] {
+  searchByFilter(lines: string[], filter: string): ICompany[] {
     const matches: ICompany[] = [];
-    lines.forEach((line, index) => {
-      if (line.includes(companyName)) {
-        const fullName = line.slice(86, 126).trim();
-        const address = line.slice(126, 166).trim();
-        const segment = line[13];
-        matches.push({
-          name: fullName,
-          address,
-          position: index,
-          segment,
-        });
+
+    lines.forEach((line) => {
+      if (line[13] === 'P' || line[13] === 'Q' || line[13] === 'R') {
+        const companyNameMatch = line.includes(filter);
+        const cityWithRegion = line
+          .slice(136, 153)
+          .trim()
+          .replace(/\s\s+/g, ' ');
+        const addressMatch = line.slice(73, 128).trim().replace(/\s\s+/g, ' ');
+        const cep = line.slice(128, 136).trim().replace(/\s\s+/g, ' ');
+
+        if (companyNameMatch) {
+          const name = line.slice(33, 73).trim().replace(/\s\s+/g, ' ');
+          const address = `${addressMatch}, ${cep}, ${cityWithRegion}`;
+
+          const segment = line[13];
+
+          matches.push({
+            name,
+            address,
+            segment,
+            position: lines.indexOf(line),
+          });
+        }
       }
     });
     return matches;

@@ -110,7 +110,7 @@ const main = () => {
   }
 
   if (optionsArgs.segmentSearch) {
-    const companies = searchService.searchBySegment(
+    const companies = searchService.searchByFilter(
       lines,
       optionsArgs.segmentSearch.toLocaleUpperCase(),
     );
@@ -123,7 +123,7 @@ const main = () => {
   }
 
   if (optionsArgs.companyName) {
-    const matches = searchService.searchByCompanyName(
+    const matches = searchService.searchByFilter(
       lines,
       optionsArgs.companyName,
     );
