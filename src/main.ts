@@ -3,7 +3,7 @@ import { hideBin } from 'yargs/helpers';
 
 import yargs from 'yargs';
 import {
-  exportToJson,
+  generateJson,
   messageLog,
   sliceArrayPosition,
   readFile,
@@ -64,6 +64,17 @@ const main = () => {
       description: 'Output path for the JSON file',
       default: DEFAULT_OUTPUT_PATH,
     })
+    .check((argv) => {
+      const isFtsUsed = 'f' in argv || 't' in argv || 's' in argv;
+      if (isFtsUsed) {
+        if (!('f' in argv && 't' in argv && 's' in argv)) {
+          throw new Error(
+            'Options --from, --to, and --segment must be used together',
+          );
+        }
+      }
+      return true;
+    })
     .help()
     .alias('help', 'h')
     .example(
@@ -71,51 +82,44 @@ const main = () => {
       'List the line and field that from and to of cnab',
     ).argv;
 
-  const { from, to, segmento } = optionsArgs;
-
-  const log = console.log;
-
   const filePath = optionsArgs.file
     ? path.resolve(optionsArgs.file)
     : DEFAULT_FILE_PATH;
   const lines = readFile(filePath);
 
-  const cnabHeader = sliceArrayPosition(lines, 0, 2);
-
   const [cnabBodySegmentoP, cnabBodySegmentoQ, cnabBodySegmentoR] =
     sliceArrayPosition(lines, 2, -2);
 
-  const cnabTail = sliceArrayPosition(lines, -2);
+  const segmentHandlers = {
+    p: () =>
+      console.log(
+        messageLog(cnabBodySegmentoP, 'P', optionsArgs.f, optionsArgs.t),
+      ),
+    q: () =>
+      console.log(
+        messageLog(cnabBodySegmentoQ, 'Q', optionsArgs.f, optionsArgs.t),
+      ),
+    r: () =>
+      console.log(
+        messageLog(cnabBodySegmentoR, 'R', optionsArgs.f, optionsArgs.t),
+      ),
+  };
 
-  if (segmento === 'p') {
-    log(messageLog(cnabBodySegmentoP, 'P', from, to));
-    return;
-  }
-
-  if (segmento === 'q') {
-    log(messageLog(cnabBodySegmentoQ, 'Q', from, to));
-    return;
-  }
-
-  if (segmento === 'r') {
-    log(messageLog(cnabBodySegmentoR, 'R', from, to));
-    return;
+  if (optionsArgs.s && segmentHandlers[optionsArgs.s]) {
+    return segmentHandlers[optionsArgs.s]();
   }
 
   if (optionsArgs.segmentSearch) {
     const companies = searchService.searchBySegment(
       lines,
-      optionsArgs.segmentSearch,
+      optionsArgs.segmentSearch.toLocaleUpperCase(),
     );
-
-    const outputFilePath = optionsArgs.output
-      ? path.resolve(optionsArgs.output)
-      : DEFAULT_OUTPUT_PATH;
-    exportToJson(companies, outputFilePath);
     console.log(
       `Companies in segment ${optionsArgs.segmentSearch}:`,
       companies,
     );
+
+    generateJson(companies, optionsArgs.output);
   }
 
   if (optionsArgs.companyName) {
@@ -128,11 +132,7 @@ const main = () => {
       matches,
     );
 
-    const outputFilePath = optionsArgs.output
-      ? path.resolve(optionsArgs.output)
-      : DEFAULT_OUTPUT_PATH;
-    exportToJson(matches, outputFilePath);
-    console.log(`Exported data to ${outputFilePath}`);
+    generateJson(matches, optionsArgs.output);
   }
 };
 

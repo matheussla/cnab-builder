@@ -1,5 +1,6 @@
+import * as path from 'path';
 import * as jsonfile from 'jsonfile';
-import chalk from 'chalk';
+import { inverse, bgBlack } from 'ansi-colors';
 import * as fs from 'fs';
 import { ICompany } from '../interfaces';
 
@@ -12,20 +13,34 @@ export const exportToJson = (data: ICompany[], outputFile: string): void => {
   jsonfile.writeFileSync(outputFile, data, { spaces: 4 });
 };
 
+export const generateJson = (
+  matches: ICompany[],
+  defaultOutput: string,
+  output?: string,
+) => {
+  const outputFilePath = output ? path.resolve(output) : defaultOutput;
+  exportToJson(matches, outputFilePath);
+};
+
 export const sliceArrayPosition = (arr, ...positions) =>
   [...arr].slice(...positions);
 
-export const messageLog = (segment, segmentType, from, to) => `
+export const messageLog = (
+  segment: string,
+  segmentType: string,
+  from: number,
+  to: number,
+): string => `
 ----- Cnab line ${segmentType} -----
 
-position from: ${chalk.inverse.bgBlack(from)}
+position from: ${inverse(bgBlack(from.toString()))}
 
-position to: ${chalk.inverse.bgBlack(to)}
+position to: ${inverse(bgBlack(to.toString()))}
 
-isolated item: ${chalk.inverse.bgBlack(segment.substring(from - 1, to))}
+isolated item: ${inverse(bgBlack(segment.substring(from - 1, to)))}
 
 item inside of line P: 
-  ${segment.substring(0, from)}${chalk.inverse.bgBlack(segment.substring(from - 1, to))}${segment.substring(to)}
+  ${segment.substring(0, from - 1)}${inverse(bgBlack(segment.substring(from - 1, to)))}${segment.substring(to)}
 
 ----- END ------
 `;

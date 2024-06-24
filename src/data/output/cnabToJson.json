@@ -10,5 +10,107 @@
         "address": "CI04711130SAO PAULO      SP0000000000000",
         "position": 6,
         "segment": "Q"
+    },
+    {
+        "name": "O E LT 0 ASA NORTE, SN ED SASA NORTE",
+        "address": "70701050BRASILIA       DF0000000000000",
+        "position": 9,
+        "segment": "Q"
+    },
+    {
+        "name": "TADO, 5533 2 ANDAR - GERENCMOOCA",
+        "address": "03105003SAO PAULO      SP0000000000000",
+        "position": 12,
+        "segment": "Q"
+    },
+    {
+        "name": "TADO, 5533 2 ANDAR - GERENCMOOCA",
+        "address": "03105003SAO PAULO      SP0000000000000",
+        "position": 15,
+        "segment": "Q"
+    },
+    {
+        "name": "TADO, 5533 2 ANDAR - GERENCMOOCA",
+        "address": "03105003SAO PAULO      SP0000000000000",
+        "position": 18,
+        "segment": "Q"
+    },
+    {
+        "name": "TADO, 5533 2 ANDAR - GERENCMOOCA",
+        "address": "03105003SAO PAULO      SP0000000000000",
+        "position": 21,
+        "segment": "Q"
+    },
+    {
+        "name": "TADO, 5533 2 ANDAR - GERENCMOOCA",
+        "address": "03105003SAO PAULO      SP0000000000000",
+        "position": 24,
+        "segment": "Q"
+    },
+    {
+        "name": "O CAVALCANTI, 100          BELA VISTA",
+        "address": "90440110PORTO ALEGRE   RS0000000000000",
+        "position": 27,
+        "segment": "Q"
+    },
+    {
+        "name": "20                         AGUA VERDE",
+        "address": "80240031CURITIBA       PR0000000000000",
+        "position": 30,
+        "segment": "Q"
+    },
+    {
+        "name": "20                         AGUA VERDE",
+        "address": "80240031CURITIBA       PR0000000000000",
+        "position": 33,
+        "segment": "Q"
+    },
+    {
+        "name": "EL PASSOS, 360             GUABIROTUBA",
+        "address": "81520900CURITIBA       PR0000000000000",
+        "position": 36,
+        "segment": "Q"
+    },
+    {
+        "name": "BELLEGARD, 820 N/A        CIDADE INDUST",
+        "address": "RI82590100CURITIBA       PR0000000000000",
+        "position": 39,
+        "segment": "Q"
+    },
+    {
+        "name": "NSO CAVALCANTI, 100",
+        "address": "00000000PORTO ALEGRE   RS0000000000000",
+        "position": 42,
+        "segment": "Q"
+    },
+    {
+        "name": "NITEROI",
+        "address": "92120190CANOAS         RS0000000000000",
+        "position": 45,
+        "segment": "Q"
+    },
+    {
+        "name": "BALDI, 1593 NA             AHU",
+        "address": "82200530CURITIBA       PR0000000000000",
+        "position": 48,
+        "segment": "Q"
+    },
+    {
+        "name": "I, 1220                    SAO JOAO",
+        "address": "90550141PORTO ALEGRE   RS0000000000000",
+        "position": 51,
+        "segment": "Q"
+    },
+    {
+        "name": "PIRES, 128                 SANTANA",
+        "address": "90620010PORTO ALEGRE   RS0000000000000",
+        "position": 54,
+        "segment": "Q"
+    },
+    {
+        "name": "S GOMES, 300 7  ANDAR      AUXILIADORA",
+        "address": "90480000PORTO ALEGRE   RS0000000000000",
+        "position": 57,
+        "segment": "Q"
     }
 ]
